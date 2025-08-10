@@ -1,0 +1,75 @@
+[
+  {
+    "name": "Linalool",
+    "aliases": ["Linalol"],
+    "cas": "78-70-6",
+    "family": ["floral", "citrus"],
+    "primary_notes": ["lavender", "floral", "citrus"],
+    "volatility": "top",
+    "typical_range_pct": [0.1, 3.0],
+    "allergens": ["linalool"]
+  },
+  {
+    "name": "Limonene",
+    "aliases": [],
+    "cas": "138-86-3",
+    "family": ["citrus"],
+    "primary_notes": ["orange", "lemon", "terpenic"],
+    "volatility": "top",
+    "typical_range_pct": [0.1, 10.0]
+  },
+  {
+    "name": "Iso E Super",
+    "aliases": ["IES", "Timberol?"],
+    "cas": null,
+    "family": ["woody", "amber"],
+    "primary_notes": ["woody", "cedar", "amber", "velvety"],
+    "volatility": "heart",
+    "typical_range_pct": [1.0, 40.0]
+  },
+  {
+    "name": "Hedione",
+    "aliases": ["Methyl Dihydrojasmonate"],
+    "cas": "24851-98-7",
+    "family": ["floral", "jasmine"],
+    "primary_notes": ["jasmine", "fresh", "diffusive"],
+    "volatility": "heart",
+    "typical_range_pct": [2.0, 35.0]
+  },
+  {
+    "name": "Ambroxan",
+    "aliases": ["Ambroxide"],
+    "cas": "6790-58-5",
+    "family": ["amber", "woody"],
+    "primary_notes": ["ambergris", "woody", "dry", "warm"],
+    "volatility": "base",
+    "typical_range_pct": [0.1, 10.0]
+  },
+  {
+    "name": "Bergamot Oil",
+    "aliases": ["Bergamot"],
+    "cas": null,
+    "family": ["citrus"],
+    "primary_notes": ["bergamot", "citrus", "fresh"],
+    "volatility": "top",
+    "typical_range_pct": [0.5, 20.0]
+  },
+  {
+    "name": "Jasmine Absolute",
+    "aliases": ["Jasmine"],
+    "cas": null,
+    "family": ["floral"],
+    "primary_notes": ["jasmine", "indolic", "floral"],
+    "volatility": "heart",
+    "typical_range_pct": [0.1, 2.0]
+  },
+  {
+    "name": "Patchouli Oil",
+    "aliases": ["Patchouli"],
+    "cas": null,
+    "family": ["woody"],
+    "primary_notes": ["earthy", "woody", "dark", "herbal"],
+    "volatility": "base",
+    "typical_range_pct": [0.1, 10.0]
+  }
+]
