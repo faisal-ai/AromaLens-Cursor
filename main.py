@@ -12,37 +12,29 @@ def local_css():
     st.markdown(
         """
         <style>
-        /* Set background image for app */
+        /* Set background image for app with overlay */
         .stApp {
-            background-image: url("https://media.istockphoto.com/id/1713008927/de/foto/workshop-für-aromatische-kerzen-reine-kerzenessenzen.jpg?s=612x612&w=0&k=20&c=ukOiYpFqLcDdyEilCyvmXh3u7UIu8AMHXU6t6TC5gMY=");
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
+                url("https://media.istockphoto.com/id/1713008927/de/foto/workshop-für-aromatische-kerzen-reine-kerzenessenzen.jpg?s=612x612&w=0&k=20&c=ukOiYpFqLcDdyEilCyvmXh3u7UIu8AMHXU6t6TC5gMY=");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
 
-        /* Light transparent overlay for better readability */
-        .stApp::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.55); /* slightly darker for contrast */
-            z-index: -1;
-        }
-
         /* Style the label of selectbox */
         div[data-testid="stSelectbox"] > label > div {
             color: black !important;
-            font-size: 1.5rem !important;
+            font-size: clamp(1.1rem, 2vw, 1.5rem) !important;
             font-weight: 600;
             padding: 0.5rem 0.75rem;
             background-color: rgba(255, 255, 255, 0.85);
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         /* Style the selectbox input */
@@ -52,6 +44,7 @@ def local_css():
             border-radius: 12px !important;
             padding: 0.5rem !important;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            min-width: 200px;
         }
 
         /* Style the placeholder text in select dropdown */
@@ -61,11 +54,20 @@ def local_css():
         }
 
         /* Rounded input boxes */
-        .stTextInput>div>div>input {
+        .stTextInput>div>div>input,
+        .stTextArea>div>div>textarea {
             border-radius: 12px !important;
             border: 1.5px solid #C49E5A !important;
             padding: 0.5rem 1rem !important;
-            font-size: 1rem !important;
+            font-size: clamp(0.9rem, 1.5vw, 1rem) !important;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 42px;
+        }
+
+        /* Better text area sizing */
+        .stTextArea>div>div>textarea {
+            min-height: 120px !important;
         }
 
         /* Buttons with smooth hover */
@@ -74,30 +76,64 @@ def local_css():
             border-radius: 12px !important;
             padding: 0.6rem 1.5rem !important;
             font-weight: 600 !important;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            min-width: 120px;
+            font-size: clamp(0.9rem, 1.5vw, 1rem) !important;
         }
         button[kind="primary"]:hover {
             background-color: #A57F32 !important;
             cursor: pointer;
+            transform: translateY(-2px);
+        }
+        button[kind="primary"]:active {
+            transform: translateY(0);
         }
 
         /* Card style for output */
         .styled-output {
             background-color: rgba(167, 216, 216, 0.9);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: clamp(1rem, 2vw, 1.5rem);
             box-shadow: 0 8px 16px rgba(196, 158, 90, 0.15);
             margin-top: 1.5rem;
             color: black;
-            max-height: 80vh;
+            max-height: 75vh;
             overflow-y: auto;
+            overflow-x: hidden;
             font-family: 'Playfair Display', cursive, serif;
+            word-wrap: break-word;
+        }
+
+        /* Custom scrollbar for output */
+        .styled-output::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .styled-output::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .styled-output::-webkit-scrollbar-thumb {
+            background: #C49E5A;
+            border-radius: 10px;
+        }
+
+        .styled-output::-webkit-scrollbar-thumb:hover {
+            background: #A57F32;
         }
 
         .styled-output p {
             color: #222 !important;
-            font-size: 1.1rem !important;
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem) !important;
             margin: 0.2rem 0 0.4rem 1rem !important;
+            line-height: 1.6 !important;
+        }
+
+        .styled-output h3 {
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem) !important;
+            margin-top: 1rem !important;
+            margin-bottom: 0.5rem !important;
         }
 
         /* Header style */
@@ -105,8 +141,40 @@ def local_css():
             font-family: 'Playfair Display', cursive, serif;
             color: #8A5C9E;
             font-weight: 700;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             margin-bottom: 0.5rem;
+        }
+
+        /* Responsive columns */
+        @media (max-width: 768px) {
+            .stApp {
+                background-attachment: scroll;
+            }
+
+            div[data-testid="stSelectbox"] > label > div {
+                font-size: 1.1rem !important;
+            }
+
+            .styled-output {
+                max-height: 60vh;
+                padding: 1rem;
+            }
+
+            button[kind="primary"] {
+                width: 100%;
+                padding: 0.8rem 1rem !important;
+            }
+        }
+
+        /* Ensure proper spacing on mobile */
+        @media (max-width: 480px) {
+            .stApp {
+                padding: 0.5rem;
+            }
+
+            div[data-testid="column"] {
+                padding: 0.25rem !important;
+            }
         }
 
         </style>
@@ -126,23 +194,26 @@ from core.data_loader import load_presets
 PRESETS_FILE = "data/presets.json"
 presets = load_presets(PRESETS_FILE)
 
-# Two columns layout: left for inputs, right for output
-col1, col2 = st.columns([1, 1.5])
+# Two columns layout: left for inputs, right for output (better balanced ratio)
+col1, col2 = st.columns([1, 1.2])
 
 with col1:
     st.markdown(
         '''
-        <div style="background-color: rgba(255, 255, 255, 0.85); 
-                    padding: 1rem 1.5rem; 
-                    border-radius: 16px; 
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-                    display: inline-block; 
-                    margin-bottom: 1rem;">
-            <h1 style="color:black; 
-                       font-weight:700; 
-                       font-size:2rem; 
-                       margin: 0;">
-                <span style="font-family: cursive; color: #8A5C9E;">🌺 AromaLens</span> : Discover Your Perfume’s Story with AI
+        <div style="background-color: rgba(255, 255, 255, 0.85);
+                    padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 2.5vw, 1.5rem);
+                    border-radius: 16px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    display: inline-block;
+                    margin-bottom: 1rem;
+                    max-width: 100%;
+                    box-sizing: border-box;">
+            <h1 style="color:black;
+                       font-weight:700;
+                       font-size: clamp(1.3rem, 2.5vw, 2rem);
+                       margin: 0;
+                       word-wrap: break-word;">
+                <span style="font-family: cursive; color: #8A5C9E;">🌺 AromaLens</span> : Discover Your Perfume's Story with AI
             </h1>
         </div>
         ''',
