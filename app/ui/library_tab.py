@@ -33,7 +33,7 @@ def render():
         st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
         compounds = get_all_compounds(db, search)
         st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); padding: 1rem; border-radius: 12px; text-align: center; color: white;">
+        <div style="background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); padding: 1rem; border-radius: 12px; text-align: center; color: white;">
             <div style="font-size: 1.5rem; font-weight: 700;">{len(compounds)}</div>
             <div style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">COMPOUNDS</div>
         </div>
@@ -136,7 +136,7 @@ def render():
                 st.markdown(f"""
                 <div style="background: linear-gradient(135deg, #F7FAFC 0%, #EDF2F7 100%); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: 600; color: #2D3748;">{ing['name']}</span>
-                    <span style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-weight: 700;">{ing['percentage']}%</span>
+                    <span style="background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-weight: 700;">{ing['percentage']}%</span>
                 </div>
                 """, unsafe_allow_html=True)
 

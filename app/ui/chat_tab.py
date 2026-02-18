@@ -38,7 +38,7 @@ def render():
                 {', '.join([ing['name'] for ing in compound['ingredients'][:3]])}{'...' if len(compound['ingredients']) > 3 else ''}
             </p>
         </div>
-        <div style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); color: white; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600;">
+        <div style="background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); color: white; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600;">
             {len(compound['ingredients'])} ingredients
         </div>
     </div>
@@ -67,15 +67,15 @@ def render():
     for msg in st.session_state.chat_messages:
         if msg["role"] == "user":
             st.markdown(f"""
-            <div style="background: linear-gradient(135deg, #EBF4FF 0%, #E9D8FD 100%); padding: 1rem 1.25rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid #667EEA;">
-                <div style="font-size: 0.75rem; color: #5A67D8; font-weight: 600; margin-bottom: 0.25rem;">YOU</div>
+            <div style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); padding: 1rem 1.25rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid #1E3A8A;">
+                <div style="font-size: 0.75rem; color: #1E40AF; font-weight: 600; margin-bottom: 0.25rem;">YOU</div>
                 <div style="color: #2D3748; line-height: 1.6;">{msg["content"]}</div>
             </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown(f"""
             <div style="background: #FFFFFF; padding: 1rem 1.25rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid #E2E8F0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <div style="font-size: 0.75rem; color: #667EEA; font-weight: 600; margin-bottom: 0.25rem;">🤖 AI ASSISTANT</div>
+                <div style="font-size: 0.75rem; color: #1E3A8A; font-weight: 600; margin-bottom: 0.25rem;">🤖 AI ASSISTANT</div>
                 <div style="color: #2D3748; line-height: 1.6;">{msg["content"]}</div>
             </div>
             """, unsafe_allow_html=True)

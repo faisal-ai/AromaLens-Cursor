@@ -53,7 +53,7 @@ def render():
             st.markdown(f"""
             <div style="background: #F7FAFC; padding: 0.5rem 1rem; border-radius: 6px; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
                 <span style="color: #2D3748;">{ing['name']}</span>
-                <span style="color: #667EEA; font-weight: 600;">{ing['percentage']}%</span>
+                <span style="color: #1E3A8A; font-weight: 600;">{ing['percentage']}%</span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -239,6 +239,6 @@ def render():
         if confidence is not None:
             st.markdown(f"""
             <div style="text-align: center; padding: 1rem; color: #A0AEC0; font-size: 0.9rem;">
-                Analysis Confidence: <span style="font-weight: 700; color: #667EEA;">{confidence * 100:.0f}%</span>
+                Analysis Confidence: <span style="font-weight: 700; color: #1E3A8A;">{confidence * 100:.0f}%</span>
             </div>
             """, unsafe_allow_html=True)

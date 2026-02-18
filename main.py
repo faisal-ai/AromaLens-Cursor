@@ -14,25 +14,31 @@ st.set_page_config(
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-    /* ===== Design System Variables ===== */
+    /* ===== Design System Variables - Navy Blue Theme ===== */
     :root {
-        --primary-color: #2D3748;
-        --secondary-color: #4A5568;
-        --accent-color: #667EEA;
-        --accent-hover: #5A67D8;
-        --success-color: #48BB78;
-        --warning-color: #ED8936;
-        --danger-color: #F56565;
-        --background: #F7FAFC;
+        --primary-color: #0A1F44;
+        --secondary-color: #1E3A5F;
+        --accent-color: #1E3A8A;
+        --accent-hover: #1E40AF;
+        --accent-light: #3B82F6;
+        --navy-dark: #0C1E3A;
+        --navy-medium: #1E3A8A;
+        --navy-light: #3B82F6;
+        --navy-gradient: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%);
+        --success-color: #10B981;
+        --warning-color: #F59E0B;
+        --danger-color: #EF4444;
+        --background: #F8FAFC;
         --surface: #FFFFFF;
         --border: #E2E8F0;
-        --text-primary: #1A202C;
-        --text-secondary: #718096;
-        --text-muted: #A0AEC0;
-        --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        --text-primary: #0F172A;
+        --text-secondary: #475569;
+        --text-muted: #94A3B8;
+        --shadow-sm: 0 1px 3px 0 rgba(10, 31, 68, 0.1);
+        --shadow-md: 0 4px 6px -1px rgba(10, 31, 68, 0.15);
+        --shadow-lg: 0 10px 15px -3px rgba(10, 31, 68, 0.2);
+        --shadow-xl: 0 20px 25px -5px rgba(10, 31, 68, 0.25);
+        --shadow-navy: 0 8px 20px rgba(30, 58, 138, 0.3);
         --radius-sm: 8px;
         --radius-md: 12px;
         --radius-lg: 16px;
@@ -44,15 +50,26 @@ st.markdown("""
     header {visibility: hidden;}
     .stDeployButton {display: none;}
 
-    /* ===== Base Layout ===== */
+    /* ===== Base Layout - Mobile Optimized ===== */
     .stApp {
-        background: var(--background);
+        background: linear-gradient(to bottom, #F8FAFC 0%, #EFF6FF 100%);
     }
 
     .block-container {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-        max-width: 1400px;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .block-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
     }
 
     /* ===== Professional Typography ===== */
@@ -89,47 +106,67 @@ st.markdown("""
         font-size: 0.95rem;
     }
 
-    /* ===== Enhanced Tab System ===== */
+    /* ===== Enhanced Tab System - Mobile First ===== */
     .stTabs {
         background: var(--surface);
         border-radius: var(--radius-lg);
-        padding: 0.5rem;
-        box-shadow: var(--shadow-md);
+        padding: 0.75rem 0.5rem;
+        box-shadow: var(--shadow-navy);
         margin-bottom: 2rem;
+        border: 1px solid rgba(30, 58, 138, 0.1);
     }
 
     .stTabs [data-baseweb="tab-list"] {
         gap: 0.5rem;
         background: transparent;
         border-bottom: none;
+        display: flex;
+        justify-content: space-between;
     }
 
     .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        padding: 0 2rem;
+        height: auto;
+        min-height: 60px;
+        padding: 1rem 0.75rem;
         background: transparent;
         border-radius: var(--radius-md);
-        font-weight: 600;
-        font-size: 0.95rem;
+        font-weight: 700;
+        font-size: 1rem;
         color: var(--text-secondary);
-        border: none;
+        border: 2px solid transparent;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        letter-spacing: 0.01em;
+        letter-spacing: 0.02em;
+        flex: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
     }
 
     .stTabs [data-baseweb="tab"]:hover {
-        background: var(--background);
-        color: var(--accent-color);
+        background: rgba(30, 58, 138, 0.05);
+        color: var(--navy-medium);
+        border-color: rgba(30, 58, 138, 0.2);
     }
 
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        background: var(--navy-gradient);
         color: white !important;
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-navy);
+        border-color: transparent;
     }
 
     .stTabs [data-baseweb="tab-panel"] {
-        padding: 2rem 0.5rem 0 0.5rem;
+        padding: 1.5rem 0 0 0;
+    }
+
+    @media (min-width: 768px) {
+        .stTabs [data-baseweb="tab"] {
+            padding: 1rem 1.5rem;
+            font-size: 1.05rem;
+        }
     }
 
     /* ===== Professional Cards ===== */
@@ -176,23 +213,24 @@ st.markdown("""
     }
 
     .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        background: var(--navy-gradient);
         color: white;
+        box-shadow: var(--shadow-navy);
     }
 
     .stButton > button[kind="primary"]:hover {
         transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 12px 28px rgba(30, 58, 138, 0.4);
     }
 
     .stButton > button[kind="secondary"] {
         background: var(--surface);
-        color: var(--accent-color);
-        border: 2px solid var(--accent-color);
+        color: var(--navy-medium);
+        border: 2px solid var(--navy-medium);
     }
 
     .stButton > button[kind="secondary"]:hover {
-        background: var(--accent-color);
+        background: var(--navy-medium);
         color: white;
     }
 
@@ -226,8 +264,8 @@ st.markdown("""
     .stTextArea > div > div > textarea:focus,
     .stSelectbox > div > div:focus-within,
     .stNumberInput > div > div > input:focus {
-        border-color: var(--accent-color) !important;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+        border-color: var(--navy-medium) !important;
+        box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15) !important;
         outline: none !important;
     }
 
@@ -274,11 +312,13 @@ st.markdown("""
     }
 
     .stChatMessage[data-testid="user-message"] {
-        background: linear-gradient(135deg, #EBF4FF 0%, #E9D8FD 100%) !important;
+        background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%) !important;
+        border-left: 4px solid var(--navy-medium);
     }
 
     .stChatMessage[data-testid="assistant-message"] {
         background: var(--surface) !important;
+        border-left: 4px solid var(--navy-light);
     }
 
     /* ===== Container Styling ===== */
@@ -312,7 +352,7 @@ st.markdown("""
 
     /* ===== Spinner ===== */
     .stSpinner > div {
-        border-top-color: var(--accent-color) !important;
+        border-top-color: var(--navy-medium) !important;
     }
 
     /* ===== Scrollbar ===== */
@@ -327,22 +367,22 @@ st.markdown("""
     }
 
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        background: var(--navy-gradient);
         border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #5A67D8 0%, #6B46C1 100%);
+        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
     }
 
     /* ===== Metric Cards ===== */
     .metric-card {
-        background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        background: var(--navy-gradient);
         color: white;
         border-radius: var(--radius-md);
         padding: 1.5rem;
         text-align: center;
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-navy);
     }
 
     .metric-value {
@@ -384,14 +424,18 @@ st.markdown("""
 # Initialize database
 init_db()
 
-# Professional Header
+# Professional Header with Attractive Title
 st.markdown("""
-<div style="text-align: center; padding: 2rem 0 3rem 0;">
-    <h1 style="font-size: 3rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-        🧪 AromaLens
+<div style="text-align: center; padding: 1.5rem 0 2.5rem 0; background: linear-gradient(135deg, rgba(10,31,68,0.03) 0%, rgba(30,58,138,0.05) 100%); border-radius: 20px; margin-bottom: 2rem;">
+    <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">🧪</div>
+    <h1 style="font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0.75rem; background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; letter-spacing: -0.03em;">
+        AromaLens
     </h1>
-    <p style="font-size: 1.1rem; color: #718096; font-weight: 500; margin: 0;">
-        Professional Perfume Compound Analysis & Development Platform
+    <p style="font-size: clamp(0.9rem, 3vw, 1.15rem); color: #475569; font-weight: 600; margin: 0; line-height: 1.4;">
+        Craft Perfect Fragrances with AI
+    </p>
+    <p style="font-size: clamp(0.75rem, 2.5vw, 0.9rem); color: #94A3B8; font-weight: 500; margin-top: 0.5rem;">
+        Professional Perfume Analysis & Development
     </p>
 </div>
 """, unsafe_allow_html=True)
