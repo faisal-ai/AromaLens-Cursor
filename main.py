@@ -131,7 +131,7 @@ st.markdown("""
         background: transparent;
         border-radius: var(--radius-md);
         font-weight: 700;
-        font-size: 1rem;
+        font-size: 0.95rem;
         color: var(--text-secondary);
         border: 2px solid transparent;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -153,9 +153,14 @@ st.markdown("""
 
     .stTabs [aria-selected="true"] {
         background: var(--navy-gradient);
-        color: white !important;
+        color: #FFFFFF !important;
         box-shadow: var(--shadow-navy);
         border-color: transparent;
+    }
+
+    /* Fix emoji and text visibility in active tabs */
+    .stTabs [aria-selected="true"] span {
+        color: #FFFFFF !important;
     }
 
     .stTabs [data-baseweb="tab-panel"] {
@@ -426,16 +431,12 @@ init_db()
 
 # Professional Header with Attractive Title
 st.markdown("""
-<div style="text-align: center; padding: 1.5rem 0 2.5rem 0; background: linear-gradient(135deg, rgba(10,31,68,0.03) 0%, rgba(30,58,138,0.05) 100%); border-radius: 20px; margin-bottom: 2rem;">
-    <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">🧪</div>
-    <h1 style="font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0.75rem; background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; letter-spacing: -0.03em;">
+<div style="text-align: center; padding: 1rem 0 1.5rem 0; background: linear-gradient(135deg, rgba(10,31,68,0.03) 0%, rgba(30,58,138,0.05) 100%); border-radius: 16px; margin-bottom: 1.5rem;">
+    <h1 style="font-size: clamp(1.75rem, 7vw, 2.5rem); margin-bottom: 0.5rem; background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; letter-spacing: -0.02em;">
         AromaLens
     </h1>
-    <p style="font-size: clamp(0.9rem, 3vw, 1.15rem); color: #475569; font-weight: 600; margin: 0; line-height: 1.4;">
+    <p style="font-size: clamp(0.85rem, 2.5vw, 1rem); color: #475569; font-weight: 600; margin: 0;">
         Craft Perfect Fragrances with AI
-    </p>
-    <p style="font-size: clamp(0.75rem, 2.5vw, 0.9rem); color: #94A3B8; font-weight: 500; margin-top: 0.5rem;">
-        Professional Perfume Analysis & Development
     </p>
 </div>
 """, unsafe_allow_html=True)

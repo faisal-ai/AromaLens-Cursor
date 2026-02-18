@@ -32,10 +32,7 @@ def render():
     if "ingredients" not in st.session_state:
         st.session_state.ingredients = [{"name": "", "percentage": 0.0}]
 
-    # Main form card - Mobile optimized
-    st.markdown('<div class="professional-card">', unsafe_allow_html=True)
-
-    # Compound basic info
+    # Compound basic info - NO CARD HERE
     st.markdown("### 📋 Basic Information")
 
     # Name input - full width on mobile
@@ -59,10 +56,9 @@ def render():
         help="Add context about your creation"
     )
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # Ingredients section
-    st.markdown('<div class="professional-card">', unsafe_allow_html=True)
     st.markdown("### 🧪 Formula Composition")
 
     # Display ingredients - Mobile friendly stacking
@@ -92,8 +88,8 @@ def render():
         elif ingredient_name:
             ing["name"] = ingredient_name
 
-        # Percentage input
-        col1, col2 = st.columns([3, 1])
+        # Percentage input with remove button side by side
+        col1, col2 = st.columns([4, 1])
         with col1:
             ing["percentage"] = st.number_input(
                 f"Percentage {idx+1}",
@@ -107,6 +103,7 @@ def render():
             )
 
         with col2:
+            st.markdown("<div style='padding-top: 0.5rem;'></div>", unsafe_allow_html=True)
             if len(st.session_state.ingredients) > 1:
                 if st.button("🗑️", key=f"remove_{idx}", help="Remove", use_container_width=True):
                     st.session_state.ingredients.pop(idx)
@@ -158,10 +155,9 @@ def render():
     if total > 0 and abs(total - 100.0) >= 0.1:
         st.warning(f"⚠️ Total must equal 100%. Currently at {total:.1f}%")
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # Action buttons - Full width on mobile
-    st.markdown("<br>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
 
     with col1:

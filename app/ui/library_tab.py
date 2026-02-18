@@ -9,37 +9,33 @@ def render():
 
     # Header
     st.markdown("""
-    <div style="margin-bottom: 2rem;">
+    <div style="margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Compound Library</h2>
-        <p style="color: #718096; font-size: 0.95rem;">Browse, search, and manage your perfume formulations</p>
+        <p style="color: #475569; font-size: 0.95rem;">Browse, search, and manage your perfume formulations</p>
     </div>
     """, unsafe_allow_html=True)
 
     # Get compounds from database
     db = next(get_db())
 
-    # Search and filter section
-    st.markdown('<div class="professional-card">', unsafe_allow_html=True)
-
+    # Search and count
     col1, col2 = st.columns([3, 1])
     with col1:
         search = st.text_input(
-            "🔍 Search",
+            "Search compounds",
             "",
-            placeholder="Search by compound name...",
-            label_visibility="collapsed"
+            placeholder="🔍 Search by name...",
+            key="library_search"
         )
     with col2:
-        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
         compounds = get_all_compounds(db, search)
+        st.markdown("<div style='padding-top: 1.75rem;'></div>", unsafe_allow_html=True)
         st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); padding: 1rem; border-radius: 12px; text-align: center; color: white;">
-            <div style="font-size: 1.5rem; font-weight: 700;">{len(compounds)}</div>
-            <div style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">COMPOUNDS</div>
+        <div style="background: linear-gradient(135deg, #0A1F44 0%, #1E3A8A 50%, #3B82F6 100%); padding: 0.75rem 1rem; border-radius: 12px; text-align: center; color: white;">
+            <div style="font-size: 1.25rem; font-weight: 700;">{len(compounds)}</div>
+            <div style="font-size: 0.75rem; font-weight: 600; opacity: 0.9;">COMPOUNDS</div>
         </div>
         """, unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
     if not compounds:
         st.markdown('<div class="professional-card" style="text-align: center; padding: 3rem;">', unsafe_allow_html=True)
@@ -64,40 +60,36 @@ def render():
     for compound in compounds:
         st.markdown('<div class="card-compact">', unsafe_allow_html=True)
 
-        col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
-
-        with col1:
-            st.markdown(f"""
-            <div>
-                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; color: #1A202C;">{compound['name']}</h3>
-                <p style="margin: 0 0 0.5rem 0; color: #718096; font-size: 0.9rem;">{compound['description'][:100] + '...' if compound['description'] and len(compound['description']) > 100 else compound['description'] or 'No description'}</p>
-                <div style="display: flex; gap: 1rem; font-size: 0.85rem; color: #A0AEC0;">
-                    <span>🧪 {compound['ingredient_count']} ingredients</span>
-                    <span>📅 {compound['updated_at'].strftime('%b %d, %Y')}</span>
-                </div>
+        # Compound info
+        st.markdown(f"""
+        <div style="margin-bottom: 0.75rem;">
+            <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1A202C;">{compound['name']}</h3>
+            <p style="margin: 0 0 0.5rem 0; color: #475569; font-size: 0.9rem;">{compound['description'][:80] + '...' if compound['description'] and len(compound['description']) > 80 else compound['description'] or 'No description'}</p>
+            <div style="display: flex; gap: 1rem; font-size: 0.85rem; color: #94A3B8;">
+                <span>🧪 {compound['ingredient_count']} ingredients</span>
+                <span>📅 {compound['updated_at'].strftime('%b %d, %Y')}</span>
             </div>
-            """, unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
 
-        with col2:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+        # Action buttons
+        col1, col2, col3 = st.columns(3)
+        with col1:
             if st.button("👁️ View", key=f"view_{compound['id']}", use_container_width=True):
                 st.session_state.selected_compound_id = compound['id']
                 st.rerun()
 
-        with col3:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+        with col2:
             if st.button("🔬 Analyze", key=f"analyze_{compound['id']}", use_container_width=True, type="secondary"):
                 st.session_state.library_selected_for_analysis = compound['id']
-                st.success(f"✓ Ready to analyze: {compound['name']}")
-                st.info("Switch to the Analyze tab to proceed")
+                st.success(f"✓ Ready: {compound['name']}")
 
-        with col4:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-            if st.button("🗑️", key=f"delete_{compound['id']}", use_container_width=True, help="Delete compound"):
+        with col3:
+            if st.button("🗑️ Delete", key=f"delete_{compound['id']}", use_container_width=True):
                 # Confirmation
                 if st.session_state.get(f"confirm_delete_{compound['id']}", False):
                     delete_compound(db, compound['id'])
-                    st.success(f"✓ Deleted: {compound['name']}")
+                    st.success(f"✓ Deleted!")
                     if f"confirm_delete_{compound['id']}" in st.session_state:
                         del st.session_state[f"confirm_delete_{compound['id']}"]
                     st.rerun()
